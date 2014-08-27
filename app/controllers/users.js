@@ -46,7 +46,7 @@ exports.edit = function(req, res){
 };
 
 exports.update = function(req, res){
-  User.update(req.body, res.locals.user._id,  function(){
+  res.locals.user.save(req.body, function(){
     res.redirect('/profile');
   });
 };

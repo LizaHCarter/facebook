@@ -1,16 +1,10 @@
 'use strict';
 
 var bcrypt = require('bcrypt'),
+    _      = require('lodash'),
     Mongo  = require('mongodb');
 
-function User(o){
-  this.email = o.email;
-  this.photo = o.photo;
-  this.tagline = o.tagline;
-  this.facebook = o.facebook;
-  this.twitter = o.twitter;
-  this.phone = o.phone;
-  this.visible = o.visible;
+function User(){
 }
 
 Object.defineProperty(User, 'collection', {
@@ -19,7 +13,9 @@ Object.defineProperty(User, 'collection', {
 
 User.findById = function(id, cb){
   var _id = Mongo.ObjectID(id);
-  User.collection.findOne({_id:_id}, cb);
+  User.collection.findOne({_id:_id}, function(err, obj){
+    cb(err, _.create(User.prototype, obj));
+  });
 };
 
 User.register = function(o, cb){
@@ -39,10 +35,19 @@ User.authenticate = function(o, cb){
   });
 };
 
-User.update = function(o, userId, cb){
-  User.collection.findOne({userId:userId}, function(err, user){
-    User.collection.save(o, cb);
+User.prototype.save = function(o, cb){
+  var properties = Object.keys(o),
+      self       = this;
+  properties.forEach(function(property){
+    switch(property){
+      case 'visible':
+        self.isVisible = o[property] === 'public';
+        break;
+      default:
+        self[property] = o[property];
+    }
   });
+  User.collection.save(this, cb);
 };
 
 module.exports = User;

@@ -7,7 +7,6 @@ var expect    = require('chai').expect,
     User      = require('../../app/models/user'),
     dbConnect = require('../../app/lib/mongodb'),
     cp        = require('child_process'),
-    Mongo     = require('mongodb'),
     db        = 'facebook-test';
 
 describe('User', function(){
@@ -30,17 +29,16 @@ describe('User', function(){
       expect(u).to.be.instanceof(User);
     });
   });
-  describe('.update', function(){
-    it('should update a user profile', function(done){
-      var body = {email:'bob@aol.com', photo:'www.bob.com', tagline:'So cool', facebook:'facebookurl', twitter:'twitterurl', phone:'555-123-4567', visible:'public'},
-          userId = Mongo.ObjectID('000000000000000000000001');
-      User.update(body, userId, function(err, user){
-        expect(user.photo).to.equal('www.bob.com');
-        expect(user.tagline).to.equal('So cool');
-        expect(user.facebook).to.equal('facebookurl');
-        expect(user.twitter).to.equal('twitterurl');
-        expect(user.visible).to.equal('public');
-        done();
+  describe('#save', function(){
+    it('should save a user profile', function(){
+      var u = new User(),
+          o = {x: 3, visible:'public', foo:'bar'};
+
+      u.baz = 'bim';
+      u.save(o, function(err, user){
+        expect(user.isVisible).to.be.true;
+        expect(user.foo).to.equal('bar');
+        expect(user.baz).to.equal('bim');
       });
     });
   });
