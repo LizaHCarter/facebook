@@ -3,7 +3,14 @@
 var bcrypt = require('bcrypt'),
     Mongo  = require('mongodb');
 
-function User(){
+function User(o){
+  this.email = o.email;
+  this.photo = o.photo;
+  this.tagline = o.tagline;
+  this.facebook = o.facebook;
+  this.twitter = o.twitter;
+  this.phone = o.phone;
+  this.visible = o.visible;
 }
 
 Object.defineProperty(User, 'collection', {
@@ -29,6 +36,12 @@ User.authenticate = function(o, cb){
     var isOk = bcrypt.compareSync(o.password, user.password);
     if(!isOk){return cb();}
     cb(user);
+  });
+};
+
+User.update = function(o, userId, cb){
+  User.collection.findOne({userId:userId}, function(err, user){
+    User.collection.save(o, cb);
   });
 };
 
