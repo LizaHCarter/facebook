@@ -1,11 +1,33 @@
 {
-  "_id" : {"$oid":"000000000000000000000001"},
-  "email" : "bob@aol.com",
-  "password" : "$2a$10$XR.IQktUUujLBxed70GQn.jWY1wZ9ThM0Tar9wTqzkI4Uk1uP2Or2"
+    "_id" : {"$oid": "53fdec9a956a5f8e07fb6206"},
+    "email" : "sue@aol.com",
+    "password" : "$2a$10$E7vth2QCk8kF9rvjWezMU..h.iMPRXiOTc5KvLqsL3EaqEEmFUh.K",
+    "photo" : "http://chicagotonight.wttw.com/sites/default/files/styles/article-large/public/field/image/Bob-Grogan.jpg",
+    "tagline" : "So cool!",
+    "facebook" : "www.facebook.com",
+    "twitter" : "www.twitter.com",
+    "phone" : "555-123-4567",
+    "isVisible" : true
 }
 {
-  "_id" : {"$oid":"000000000000000000000002"},
-  "email" : "sue@aol.com",
-  "password" : "$2a$10$sjPx9TkrEASeXzH6uuDCDO.n1Sj/H2A/bu/9hBFfm5fm3Z4LzrEPa"
+    "_id" : {"$oid": "53fdec9a956a5f8e07fb6207"},
+    "email" : "joe@aol.com",
+    "password" : "$2a$10$E7vth2QCk8kF9rvjWezMU..h.iMPRXiOTc5KvLqsL3EaqEEmFUh.K",
+    "photo" : "http://chicagotonight.wttw.com/sites/default/files/styles/article-large/public/field/image/Bob-Grogan.jpg",
+    "tagline" : "So cool!",
+    "facebook" : "www.facebook.com",
+    "twitter" : "www.twitter.com",
+    "phone" : "555-123-4567",
+    "isVisible" : false
 }
-
+{
+    "_id" : {"$oid": "53fdec9a956a5f8e07fb6205"},
+    "email" : "bob@aol.com",
+    "password" : "$2a$10$E7vth2QCk8kF9rvjWezMU..h.iMPRXiOTc5KvLqsL3EaqEEmFUh.K",
+    "photo" : "http://chicagotonight.wttw.com/sites/default/files/styles/article-large/public/field/image/Bob-Grogan.jpg",
+    "tagline" : "So cool!",
+    "facebook" : "www.facebook.com",
+    "twitter" : "www.twitter.com",
+    "phone" : "555-123-4567",
+    "isVisible" : true
+}

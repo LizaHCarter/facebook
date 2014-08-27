@@ -29,6 +29,7 @@ describe('User', function(){
       expect(u).to.be.instanceof(User);
     });
   });
+
   describe('#save', function(){
     it('should save a user profile', function(){
       var u = new User(),
@@ -39,6 +40,14 @@ describe('User', function(){
         expect(user.isVisible).to.be.true;
         expect(user.foo).to.equal('bar');
         expect(user.baz).to.equal('bim');
+      });
+    });
+  });
+
+  describe('.find', function(){
+    it('should show all public users', function(){
+      User.find({isVisible:true}, function(err, users){
+        expect(users).to.have.length(2);
       });
     });
   });
