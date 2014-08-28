@@ -45,18 +45,34 @@ describe('User', function(){
   });
 
   describe('.find', function(){
-    it('should show all public users', function(){
+    it('should find users who are public', function(done){
       User.find({isVisible:true}, function(err, users){
         expect(users).to.have.length(2);
+        done();
       });
     });
   });
-  describe('.findByEmail', function(){
-    it('should show specific profile', function(){
-      User.findByEmail('bob@aol.com', function(err, user){
-        expect(user.facebook).to.equal('www.facebook.com');
+
+  describe('.findOne', function(){
+    it('should find a specific user', function(done){
+      User.findOne({email:'bob@aol.com', isVisible:true}, function(err, user){
+        expect(user.email).to.equal('bob@aol.com');
+        done();
+      });
+    });
+  });
+
+  describe('#send', function(){
+    it('should send a text message to a user', function(done){
+      User.findById('000000000000000000000001', function(err, sender){
+        User.findById('000000000000000000000002', function(err, receiver){
+          sender.send(receiver, {mtype:'text', message:'yo'}, function(err, response){
+            console.log('SEND.....', err, response);
+            expect(response.sid).to.be.ok;
+            done();
+          });
+        });
       });
     });
   });
 });
-

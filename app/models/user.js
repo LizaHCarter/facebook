@@ -76,9 +76,10 @@ module.exports = User;
 function sendText(to, body, cb){
   if(!to){return cb();}
 
-  var accountSid = 'AC92f1ac97c06178a47eb6860ca6c419b2',
-      authToken = process.env.TWILIO,
+  var accountSid = process.env.TWSID,
+      authToken = process.env.TWTOK,
+      from  = process.env.FROM,
       client = require('twilio')(accountSid, authToken);
 
-  client.messages.create({to: to, from: '+18032503914', body: body}, cb);
+  client.messages.create({to: to, from: from, body: body}, cb);
 }
