@@ -38,6 +38,7 @@ User.authenticate = function(o, cb){
 User.prototype.save = function(o, cb){
   var properties = Object.keys(o),
       self       = this;
+
   properties.forEach(function(property){
     switch(property){
       case 'visible':
@@ -54,5 +55,30 @@ User.find = function(filter, cb){
   User.collection.find(filter).toArray(cb);
 };
 
+User.findOne = function(filter, cb){
+  User.collection.findOne(filter, cb);
+};
+
+User.prototype.send = function(receiver, obj, cb){
+  switch(obj.mtype){
+    case 'text':
+      sendText(receiver.phone, obj.message, cb);
+      break;
+    case 'email':
+      break;
+    case 'internal':
+
+  }
+};
+
 module.exports = User;
 
+function sendText(to, body, cb){
+  if(!to){return cb();}
+
+  var accountSid = 'AC92f1ac97c06178a47eb6860ca6c419b2',
+      authToken = process.env.TWILIO,
+      client = require('twilio')(accountSid, authToken);
+
+  client.messages.create({to: to, from: '+18032503914', body: body}, cb);
+}

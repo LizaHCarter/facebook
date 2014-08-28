@@ -51,5 +51,12 @@ describe('User', function(){
       });
     });
   });
+  describe('.findByEmail', function(){
+    it('should show specific profile', function(){
+      User.findByEmail('bob@aol.com', function(err, user){
+        expect(user.facebook).to.equal('www.facebook.com');
+      });
+    });
+  });
 });
 
