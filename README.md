@@ -1,6 +1,6 @@
 ## name of project
 ### Code Badges
-build status icon
+[![Build Status](https://travis-ci.org/LizaHCarter/facebook.svg)](https://travis-ci.org/LizaHCarter/facebook)
 coverage status icon
 
 ### About
