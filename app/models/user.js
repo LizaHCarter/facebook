@@ -1,8 +1,9 @@
 'use strict';
 
-var bcrypt = require('bcrypt'),
-    _      = require('lodash'),
-    Mongo  = require('mongodb');
+var bcrypt  = require('bcrypt'),
+    _       = require('lodash'),
+    Mailgun = require('mailgun-js'),
+    Mongo   = require('mongodb');
 
 function User(){
 }
@@ -65,6 +66,7 @@ User.prototype.send = function(receiver, obj, cb){
       sendText(receiver.phone, obj.message, cb);
       break;
     case 'email':
+      sendEmail(this.email,receiver.email, 'Message from Facebook',  obj.message, cb);
       break;
     case 'internal':
 
@@ -82,4 +84,14 @@ function sendText(to, body, cb){
       client = require('twilio')(accountSid, authToken);
 
   client.messages.create({to: to, from: from, body: body}, cb);
+}
+
+function sendEmail(from, to, subject, message, cb){
+  var mailgun = new Mailgun({apiKey:process.env.MGAPI, domain:process.env.MGDM}),
+      data    = {from: from, to:to, subject:subject, text:message};
+
+  console.log('send email....');
+  console.log(data);
+
+  mailgun.messages().send(data, cb);
 }

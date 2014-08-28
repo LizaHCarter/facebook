@@ -74,5 +74,16 @@ describe('User', function(){
         });
       });
     });
+    it('should send an email to a user', function(done){
+      User.findById('000000000000000000000001', function(err, sender){
+        User.findById('000000000000000000000002', function(err, receiver){
+          sender.send(receiver, {mtype:'email', message:'yo'}, function(err, response){
+            console.log(err);
+            expect(response.id).to.be.ok;
+            done();
+          });
+        });
+      });
+    });
   });
 });

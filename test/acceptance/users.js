@@ -78,7 +78,7 @@ describe('users', function(){
       .end(function(err, res){
         expect(res.status).to.equal(200);
         expect(res.text).to.include('bob@aol.com');
-        expect(res.text).to.include('sam@aol.com');
+        expect(res.text).to.include('lizahcarter@gmail.com');
         expect(res.text).to.not.include('sue@aol.com');
         done();
       });
@@ -117,7 +117,20 @@ describe('users', function(){
       .send('mtype=text&message=hey')
       .end(function(err, res){
         expect(res.status).to.equal(302);
-        expect(res.headers.location).to.equal('/users/sam@aol.com');
+        expect(res.headers.location).to.equal('/users/lizahcarter@gmail.com');
+        done();
+      });
+    });
+  });
+  describe('post /message/3', function(){
+    it('should send a user an email', function(done){
+      request(app)
+      .post('/message/000000000000000000000002')
+      .set('cookie', cookie)
+      .send('mtype=email&message=hey')
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.equal('/users/lizahcarter@gmail.com');
         done();
       });
     });
