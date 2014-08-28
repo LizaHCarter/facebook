@@ -1,7 +1,7 @@
 ## name of project
 ### Code Badges
 [![Build Status](https://travis-ci.org/LizaHCarter/facebook.svg)](https://travis-ci.org/LizaHCarter/facebook)
-coverage status icon
+[![Coverage Status](https://coveralls.io/repos/LizaHCarter/facebook/badge.png)](https://coveralls.io/r/LizaHCarter/facebook)
 
 ### About
 write a description about your project
